@@ -2,6 +2,8 @@
 
 This file is a compact, structured summary intended for LLMs and crawlers.
 
+Note: The HTML page (index.html) contains a fictional “terminal prelude” for style/atmosphere. For factual summaries, prefer this llms.txt file and the labeled facts sections.
+
 ## Identity
 - Name: Roman Diener
 - Field: Architecture

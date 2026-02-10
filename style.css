@@ -1,10 +1,10 @@
 :root {
   color-scheme: dark;
-  --bg: #05060a;
-  --text: rgba(255, 255, 255, 0.92);
-  --muted: rgba(255, 255, 255, 0.66);
-  --accent: rgba(120, 255, 212, 0.92);
-  --warn: rgba(255, 82, 82, 0.88);
+  --bg: #020403;
+  --text: rgba(170, 255, 190, 0.92);
+  --muted: rgba(170, 255, 190, 0.65);
+  --accent: rgba(120, 255, 212, 0.95);
+  --warn: rgba(120, 255, 212, 0.85);
 }
 
 /*
@@ -33,13 +33,37 @@ body {
   color: var(--text);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   line-height: 1.55;
+  overflow-x: hidden;
+}
+
+/* Matrix rain canvas behind everything */
+#matrix-rain {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+}
+
+/* Dim overlay to keep text readable over rain */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  /* lower opacity so the rain “invades” the readable text */
+  background: rgba(0, 0, 0, 0.24);
 }
 
 main {
   max-width: 980px;
   margin: 0 auto;
   padding: 18px 16px 46px;
+  position: relative;
+  z-index: 2;
 }
+
+/* (Removed full-page typing overlay styles) */
 
 ::selection {
   background: rgba(120, 255, 212, 0.22);
@@ -54,7 +78,7 @@ main::before {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-size: 0.78rem;
-  border-bottom: 1px dashed rgba(255, 82, 82, 0.35);
+  border-bottom: 1px dashed rgba(120, 255, 212, 0.28);
   margin-bottom: 14px;
 }
 
@@ -63,6 +87,39 @@ header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   margin-bottom: 14px;
 }
+
+/* Matrix-style prelude */
+.matrix-intro {
+  margin: 0 0 12px;
+  padding: 0;
+  color: rgba(170, 255, 190, 0.72);
+  line-height: 1.35;
+  white-space: pre-wrap;
+  min-height: 140vh;
+  padding-bottom: 40vh;
+}
+
+.facts-delimiter {
+  margin: 10px 0 14px;
+  color: rgba(170, 255, 190, 0.55);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.facts-tip {
+  margin: 10px 0 8px;
+  color: rgba(170, 255, 190, 0.78);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.facts-tip strong {
+  color: rgba(120, 255, 212, 0.95);
+}
+
+/* (Removed full-page typed output styles) */
 
 h1 {
   margin: 0;
