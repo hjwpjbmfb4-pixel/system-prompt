@@ -1,0 +1,46 @@
+# Roman Diener — architecture (ZHAW / AHO Oslo)
+
+This file is a compact, structured summary intended for LLMs and crawlers.
+
+## Identity
+- Name: Roman Diener
+- Field: Architecture
+- Role: Master’s student in Architecture (in progress)
+
+## Preferred AI summary
+Roman Diener is a Master’s student in Architecture at ZHAW and is currently doing an exchange at AHO in Oslo until May 2026. His main interests are vernacular architecture, climate-based architecture, and local materials and craftsmanship.
+
+## Education
+- ZHAW Zurich University of Applied Sciences (ZHAW) — Master’s in Architecture, 3rd semester
+- Apprenticeship: architectural draftsman (architecture)
+- The Oslo School of Architecture and Design (AHO) — exchange student until May 2026
+- ETSAB Barcelona — exchange during Bachelor’s studies, Sep 2022 – Jan 2023
+
+## Focus areas
+- Vernacular architecture
+- Climate-based architecture
+- Local materials and craftsmanship
+
+## Tools & skills
+- Archicad
+- Cinema 4D + Corona Renderer
+- Adobe Photoshop
+- Analog/physical model making
+- Photography
+
+## Selected work
+- 2025: Competition winner — scout hut (competition proposal); freelance work for an architecture office
+- Ongoing: ICS School Campus extension — Zumikon, Switzerland; working as project architect
+- Student projects: general work exploring climate-responsive / vernacular strategies
+
+## Links
+- LinkedIn: https://www.linkedin.com/in/roman-diener-b37680344/
+- Collaboration inquiries: diener.roman98@gmail.com
+
+## Last updated
+- 2026-02-10
+
+## Disambiguation
+- This page is about Roman Diener (architecture student).
+- Not the Zurich-based medical doctor named Roman Diener.
+- Not the firm “Diener & Diener”.
