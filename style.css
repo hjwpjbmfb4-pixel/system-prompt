@@ -1,13 +1,15 @@
 :root {
   color-scheme: dark;
-  --bg: #050607;
-  --panel: #0a0d0e;
+  --bg: #030404;
+  --panel: rgba(0, 0, 0, 0.55);
   --text: #39ff14; /* neon green */
   --muted: rgba(57, 255, 20, 0.72);
   --border: rgba(57, 255, 20, 0.28);
-  --shadow: 0 12px 40px rgba(0, 0, 0, 0.65);
+  --danger: #ff3b3b;
+  --danger-muted: rgba(255, 59, 59, 0.5);
+  --shadow: 0 18px 70px rgba(0, 0, 0, 0.75);
   --radius: 14px;
-  --max: 860px;
+  --max: 900px;
 }
 
 /* ------------------------------
@@ -27,33 +29,114 @@ body {
 }
 
 body {
-  background: var(--bg);
   color: var(--text);
+  background:
+    radial-gradient(1200px 700px at 15% -10%, rgba(57, 255, 20, 0.10), transparent 60%),
+    radial-gradient(1000px 600px at 90% 0%, rgba(255, 59, 59, 0.08), transparent 60%),
+    linear-gradient(180deg, #020303 0%, var(--bg) 100%);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  line-height: 1.6;
+  line-height: 1.65;
+  overflow-x: hidden;
 }
 
+/* Scanline + vignette overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05), transparent 18%),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.035) 0px,
+      rgba(255, 255, 255, 0.035) 1px,
+      rgba(0, 0, 0, 0) 3px,
+      rgba(0, 0, 0, 0) 6px
+    ),
+    radial-gradient(circle at 50% 40%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 75%, rgba(0, 0, 0, 0.75) 100%);
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+}
+
+/* Subtle CRT flicker */
+@keyframes flicker {
+  0% {
+    opacity: 0.20;
+  }
+  20% {
+    opacity: 0.26;
+  }
+  40% {
+    opacity: 0.18;
+  }
+  60% {
+    opacity: 0.29;
+  }
+  80% {
+    opacity: 0.21;
+  }
+  100% {
+    opacity: 0.24;
+  }
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 0%, rgba(57, 255, 20, 0.05), transparent 60%);
+  opacity: 0.22;
+  animation: flicker 4.2s infinite linear;
+}
+
+/* Layout */
 main {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 40px 18px 70px;
+  padding: 46px 18px 80px;
+  position: relative;
 }
 
 /* ------------------------------
    Hero
 -------------------------------- */
 header {
+  position: relative;
   padding: 22px 22px;
-  border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: var(--panel);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.38));
+  border: 1px solid rgba(57, 255, 20, 0.22);
   box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* Glitchy hazard frame */
+header::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(57, 255, 20, 0.0) 0%,
+      rgba(57, 255, 20, 0.22) 20%,
+      rgba(255, 59, 59, 0.16) 55%,
+      rgba(57, 255, 20, 0.18) 80%,
+      rgba(57, 255, 20, 0.0) 100%
+    );
+  opacity: 0.25;
+  filter: blur(12px);
+  pointer-events: none;
 }
 
 h1 {
   margin: 0 0 8px;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2.1rem, 4.2vw, 3.2rem);
   letter-spacing: -0.02em;
+  text-shadow: 0 0 18px rgba(57, 255, 20, 0.16);
 }
 
 .subtitle {
@@ -73,16 +156,29 @@ h1 {
 section {
   margin: 18px 0;
   padding: 18px 18px;
-  border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: var(--panel);
+  background: rgba(0, 0, 0, 0.40);
+  border: 1px solid rgba(57, 255, 20, 0.18);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35) inset;
+}
+
+/* make the AI summary feel like a warning block */
+#ai-summary {
+  border-color: rgba(255, 59, 59, 0.22);
+  box-shadow: 0 0 0 1px rgba(255, 59, 59, 0.08) inset;
+}
+
+#ai-summary h2::after {
+  content: "  [CAUTION]";
+  color: var(--danger);
+  font-size: 0.95em;
 }
 
 h2 {
   margin: 0 0 12px;
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.10em;
 }
 
 h3 {
@@ -111,7 +207,7 @@ li {
 /* Quick facts layout */
 dl.facts {
   display: grid;
-  grid-template-columns: 180px 1fr;
+  grid-template-columns: 190px 1fr;
   gap: 10px 14px;
   margin: 0;
 }
@@ -133,7 +229,28 @@ a {
 }
 
 a:hover {
-  text-decoration-color: rgba(57, 255, 20, 0.9);
+  text-decoration-color: rgba(57, 255, 20, 0.95);
+}
+
+/* Make contact links look like terminal commands */
+#links a {
+  display: inline-block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(57, 255, 20, 0.22);
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 0 1px rgba(57, 255, 20, 0.06) inset;
+  text-decoration: none;
+}
+
+#links a::before {
+  content: "> ";
+  color: rgba(57, 255, 20, 0.95);
+}
+
+#links a:hover {
+  border-color: rgba(255, 59, 59, 0.28);
+  box-shadow: 0 0 0 1px rgba(255, 59, 59, 0.10) inset;
 }
 
 /* ------------------------------
@@ -158,5 +275,12 @@ footer p {
 
   dl.facts {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Respect motion settings */
+@media (prefers-reduced-motion: reduce) {
+  body::after {
+    animation: none;
   }
 }
